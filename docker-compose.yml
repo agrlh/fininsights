@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  stock-data-crawler:
+    build:
+      context: ./src/dataCrawler/
+      dockerfile: Dockerfile
+    volumes:
+      - ${DATA_CRAWLER_CACHE}:/data/cache/
+    networks:
+      - internal
+    environment:
+      - TICKER
+
+# Network connections for the container
+networks:
+  internal:
+    external: false
+  web:
+    external: true
